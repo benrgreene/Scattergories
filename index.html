@@ -3,14 +3,25 @@
   <head>
     <title>Scrabble Cards</title>
     <script type="text/javascript" language="javascript" src="data.json"></script>
+    <link href="styles.css" rel="stylesheet" />
   </head>
   <body>
-    <section class="game__data">
-
+    <section class="game__data l-contain">
+      <div>Letter: <span class="letter"></span></div>
+      <div>Time Left: <span class="timer"></span></div>
+      <div>Score: <span class="score" id="js-score"></span></div>
+      <div>
+        <button id="js-next-round">Next Round</button>
+        <button id="js-score-round">Score Round</button>
+      </div>
+      <div><button id="js-new-game">New Game</button></div>
     </section>
-    <section id="js-cards-container" class="game__card">
-
+    <section class="game__labels l-contain">
+      <p>Category</p>
+      <p>Your Answer</p>
+      <p>Did someone else give this answer?</p>
     </section>
+    <section id="js-cards-container" class="game__cards l-contain"></section>
     <script type="text/javascript" language="javascript" src="game.js"></script>
   </body>
 </html>

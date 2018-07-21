@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+}
+
+label[disabled="disabled"] {
+  color: #666;
+}
+
+.l-contain {
+  margin: auto;
+  padding: 0 20px;
+  max-width: 950px;
+  width: 100%;
+}
+
+.game__cards {
+  margin-top: 10px;
+}
+
+.card + .card {
+  margin-top: 10px;
+}
+
+.game__data,
+.game__labels,
+.card {
+  display: flex;
+}
+
+.game__data {
+  margin: 30px 0;
+}
+
+.game__data div {
+  flex-basis: 20%;
+  flex-grow: 1;
+}
+
+.game__labels p,
+.card__title,
+.card__answer,
+.card__taken {
+  flex-basis: 33%;
+}
+
+.card__taken, 
+.game__labels p:nth-of-type(3) {
+  padding-left: 20px;
+}
