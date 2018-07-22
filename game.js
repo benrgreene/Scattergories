@@ -1,16 +1,21 @@
 const cardsContainer  = document.querySelector("#js-cards-container");
-const scoreRoundBtn   = document.querySelector("#js-score-round");
 const nextRoundBtn    = document.querySelector("#js-next-round");
 const newGameBtn      = document.querySelector("#js-new-game");
 const scoreContainer  = document.querySelector("#js-score");
 const letterContainer = document.querySelector("#js-letter");
+const timeContainer   = document.querySelector("#js-timer");
 
 const possibleLetters = 'abcdefghijklmnopqrstuvwxyz';
 const maxCards        = data.length;
+const gameLength      = 120000; // Two minutes
+const tickAmount      = 1000;
 
 let cardNumber = 0;
 let score      = 0;
 let letter     = '';
+let timer      = null;
+let timePassed = 0;
+
 
 /**
  * ----------------------------------------------
@@ -19,11 +24,7 @@ let letter     = '';
  */
 
 // Start a new game
-document.addEventListener("DOMContentLoaded", startNewGame);
 newGameBtn.addEventListener("click", startNewGame);
-
-// Score a single round
-scoreRoundBtn.addEventListener("click", beginScoringRound);
 
 // Move on to the next round
 nextRoundBtn.addEventListener("click", finishScoringRound);
@@ -37,11 +38,16 @@ nextRoundBtn.addEventListener("click", finishScoringRound);
 // Starts a new game
 function startNewGame() {
   score = 0;
+  scoreContainer.innerText = score;
 
   startNewRound();
 }
 
 function startNewRound() {
+  clearInterval(timer);
+  timer      = null;
+  timePassed = 0;
+
   removePreviousCard();
   displayNewLetter();
   loadNewCard();
@@ -51,18 +57,36 @@ function startNewRound() {
   disableAllInClass('.card__was-taken');
   disableAllInClass('label');
 
-  scoreRoundBtn.style.display = 'inline';
+  // Hide the next round button while a round is in play
   nextRoundBtn.style.display = 'none';
+
+  timer = setInterval(function(event) {
+    tickGameCounter();
+  }, tickAmount);
+}
+
+function tickGameCounter(event) {
+  timePassed += tickAmount;
+  if (timePassed >= gameLength) {
+    beginScoringRound(event);
+  }
+
+  let displayTime = gameLength - timePassed;
+  displayTime     = displayTime / 1000;
+  
+  timeContainer.innerHTML = Math.floor(displayTime / 60) + ':' + (displayTime % 60);
 }
 
 // Disable changing answers, and enable elements for scoring rounds
 function beginScoringRound(event) {
+  clearInterval(timer);
+  timer = null;
+
   disableAllInClass('.card__answer');
   enableAllInClass('.card__was-taken');
   enableAllInClass('label');
 
-  // Hide the score round button and display the next round button
-  scoreRoundBtn.style.display = 'none';
+  // display the next round button
   nextRoundBtn.style.display = 'inline';
 }
 
