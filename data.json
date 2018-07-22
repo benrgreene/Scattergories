@@ -11,5 +11,19 @@ let data = [
     "Website",
     "Type of Clothing",
     "Emotion" 
+  ],
+  [
+    "Kitchen Appliance",
+    "Sport",
+    "Flavor",
+    "Book Character",
+    "Something you throw away",
+    "City",
+    "Type of Flower",
+    "President",
+    "Name of Game",
+    "Something you'd draw on",
+    "Currency",
+    "Superhero",
   ]
 ]

@@ -34,7 +34,7 @@ label[disabled="disabled"] {
 }
 
 .game__data {
-  margin: 30px 0;
+  margin: 30px auto;
 }
 
 .game__data div {

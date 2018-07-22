@@ -4,10 +4,12 @@ const nextRoundBtn   = document.querySelector("#js-next-round");
 const newGameBtn     = document.querySelector("#js-new-game");
 const scoreContainer = document.querySelector("#js-score");
 
-let maxCards   = 0;
+const possibleLetters = 'abcdefghijklmnopqrstuvwxyz';
+const maxCards        = data.length;
+
 let cardNumber = 0;
 let score      = 0;
-let letter     = 'e';
+let letter     = '';
 
 /**
  * ----------------------------------------------
@@ -40,8 +42,6 @@ function startNewGame() {
 
 function startNewRound() {
   removePreviousCard();
-
-  maxCards   = data.length;
   cardNumber = getNewCard();
   loadCard();
 
@@ -87,7 +87,7 @@ function finishScoringRound(event) {
 
 // Get a new card to display
 function getNewCard() {
-  return cardNumber;
+  return Math.floor(Math.random() * maxCards);
 }
 
 // load card into the game "board"
