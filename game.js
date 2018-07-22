@@ -1,8 +1,9 @@
-const cardsContainer = document.querySelector("#js-cards-container");
-const scoreRoundBtn  = document.querySelector("#js-score-round");
-const nextRoundBtn   = document.querySelector("#js-next-round");
-const newGameBtn     = document.querySelector("#js-new-game");
-const scoreContainer = document.querySelector("#js-score");
+const cardsContainer  = document.querySelector("#js-cards-container");
+const scoreRoundBtn   = document.querySelector("#js-score-round");
+const nextRoundBtn    = document.querySelector("#js-next-round");
+const newGameBtn      = document.querySelector("#js-new-game");
+const scoreContainer  = document.querySelector("#js-score");
+const letterContainer = document.querySelector("#js-letter");
 
 const possibleLetters = 'abcdefghijklmnopqrstuvwxyz';
 const maxCards        = data.length;
@@ -42,8 +43,8 @@ function startNewGame() {
 
 function startNewRound() {
   removePreviousCard();
-  cardNumber = getNewCard();
-  loadCard();
+  displayNewLetter();
+  loadNewCard();
 
   // Reset interactable elements
   enableAllInClass('.card__answer');
@@ -79,6 +80,11 @@ function finishScoringRound(event) {
   startNewRound();
 }
 
+function displayNewLetter() {
+  letter = getNewLetter();
+  letterContainer.innerHTML = letter;
+}
+
 /**
  * ----------------------------------------------
  * Helper Methods
@@ -90,8 +96,14 @@ function getNewCard() {
   return Math.floor(Math.random() * maxCards);
 }
 
+function getNewLetter() {
+  var letterIndex = Math.floor(Math.random() * possibleLetters.length);
+  return possibleLetters.substring(letterIndex, letterIndex + 1);
+}
+
 // load card into the game "board"
-function loadCard() {
+function loadNewCard() {
+  cardNumber = getNewCard();
   data[cardNumber].forEach((row, index) => {
     cardsContainer.innerHTML += `
       <div class="card">
